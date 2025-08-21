@@ -7,24 +7,18 @@ def cat_population(years)
 
   years.times do |year|
     if year >= 2
-      new_cats = history[year - 2][:kittens]
+      new_cats = history[year - 2][:kitten]
       cats += new_cats
     end
 
     new_kittens = cats
     kittens += new_kittens
   
-    history << {kittens: kittens, cats:cats}
+    history << {kitten: kittens, cat: cats}
   end
-  { kittens: kittens, cats: cats }
+
+  { kitten: kittens, cat: cats }
 end
 
-
-
-
-
-
-
-
-
-puts ARGV[0]
+years = ARGV[0].to_i
+puts cat_population(years)
