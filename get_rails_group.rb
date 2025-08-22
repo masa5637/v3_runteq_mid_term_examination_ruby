@@ -31,5 +31,16 @@ curriculum_data = [
   ["Admin課題", 4]
 ]
 
+grouped = curriculum_data.group_by { |_, hour| hour }
+                         .map do |hour, items|
+                           {
+                             hour: hour,
+                             count: items.size,
+                             contents: items.map { |title, _| title }
+                           }
+                         end
+                         .sort_by { |h| -h[:hour] } # hour降順
+
+
 # 動作確認サンプル
-puts curriculum_data
+puts grouped
