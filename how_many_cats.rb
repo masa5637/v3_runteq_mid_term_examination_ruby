@@ -1,23 +1,20 @@
 # ARGV[i]で引数の経過年数を取得できます。
 # 実行サンプル
 def cat_population(years)
-  kittens = 1
   cats = 0
-  history = []
+  kittens = [0]
 
-  years.times do |year|
-    if year >= 2
-      new_cats = history[year - 2][:kitten]
-      cats += new_cats
-    end
+  years.times do
+    kittens.map! { |k| k + 1 }
 
-    new_kittens = cats
-    kittens += new_kittens
-  
-    history << {kitten: kittens, cat: cats}
+    matured = kittens.select { |k| k >= 2 }
+    cats += matured.size
+    kittens.reject! { |k| k >= 2 }
+
+    kittens += [0] * cats
   end
 
-  { kitten: kittens, cat: cats }
+  { cat: cats, kitten: kittens.size }
 end
 
 years = ARGV[0].to_i
